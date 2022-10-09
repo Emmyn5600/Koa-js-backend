@@ -1,0 +1,72 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "better-npm-run test",
+    "dev": "better-npm-run dev",
+    "start": "babel-node server.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "undo-migrate": "sequelize-cli db:migrate:undo",
+    "undo-all-migration": "sequelize-cli db:migrate:undo:all",
+    "seed": "npx sequelize-cli db:seed:all",
+    "undo-seed": "npx sequelize-cli db:seed:undo:all",
+    "build": "babel -d dist"
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "nodemon --exec babel-node server",
+      "env": {
+        "PORT": 3000,
+        "NODE_ENV": "development"
+      }
+    },
+    "prod": {
+      "command": "node ./dist/server",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 8000
+      }
+    },
+    "test": {
+      "command": "mocha --require @babel/register ./__test__/ --recursive --timeout 20000 --exit",
+      "env": {
+        "NODE_ENV": "test",
+        "PORT": 5000
+      }
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.19.1",
+    "@babel/register": "^7.18.9",
+    "@koa/cors": "^4.0.0",
+    "babel-node": "^0.0.1-security",
+    "basename": "^0.1.2",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "better-npm-run": "^0.1.1",
+    "betterscript": "^1.0.2",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-router": "^12.0.0",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "readdir": "^1.0.2",
+    "sequelize": "^6.24.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/node": "^7.19.1",
+    "@babel/preset-env": "^7.19.3",
+    "nodemon": "^2.0.20",
+    "sequelize-cli": "^6.5.1"
+  }
+}

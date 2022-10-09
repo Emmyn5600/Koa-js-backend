@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  koa_backend:
+    container_name: koa_backend
+    image: emmy/koa_backend_template:0.0.1
+    build:
+      context: .
+    ports:
+      - "5432:5432"
+    environment:
+      - DATABASE_URL=postgres://no_one:no_one@127.0.0.1:5432/crudkoa
+    depends_on:
+      - koa_db
+  koa_db:
+    container_name: koa_db
+    image: "postgres:12"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - nps_data:/var/lib/postgresql/data
+volumes:
+  nps_data: {}
