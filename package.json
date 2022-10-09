@@ -6,17 +6,17 @@
   "scripts": {
     "test": "better-npm-run test",
     "dev": "better-npm-run dev",
-    "start": "babel-node server.js",
+    "start": "babel-node src/server.js",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-migrate": "sequelize-cli db:migrate:undo",
     "undo-all-migration": "sequelize-cli db:migrate:undo:all",
     "seed": "npx sequelize-cli db:seed:all",
     "undo-seed": "npx sequelize-cli db:seed:undo:all",
-    "build": "babel -d dist"
+    "build": "babel src -d dist"
   },
   "betterScripts": {
     "dev": {
-      "command": "nodemon --exec babel-node server",
+      "command": "nodemon --exec babel-node ./src/server",
       "env": {
         "PORT": 3000,
         "NODE_ENV": "development"
