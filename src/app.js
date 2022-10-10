@@ -10,7 +10,11 @@ import {
   deleteUser,
 } from "./controller/users";
 
-import { createAttendance, updateAttendance } from "./controller/attendance";
+import {
+  createAttendance,
+  updateAttendance,
+  getAllAttendances,
+} from "./controller/attendance";
 import { signup, signin } from "./controller/authUsers";
 
 import { protect, admin } from "./middleware/authAdmin";
@@ -45,6 +49,7 @@ router
   .post("/signup", signup)
   .post("/signin", signin)
   .post("/createAttendance/:id", protect, admin, createAttendance)
-  .put("/updateAttendance/:id", protect, admin, updateAttendance);
+  .put("/updateAttendance/:id", protect, admin, updateAttendance)
+  .get("/getAllAttendances", protect, admin, getAllAttendances);
 
 export default app;

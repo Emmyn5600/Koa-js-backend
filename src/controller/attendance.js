@@ -40,6 +40,23 @@ export const createAttendance = async (ctx, next) => {
   }
 };
 
+export const getAllAttendances = async (ctx, next) => {
+  try {
+    const allAttendances = await Attendance.findAll();
+    ctx.status = 200;
+    ctx.body = {
+      allAttendances,
+      message: "OK, All users has been listed",
+    };
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = {
+      message: "Internal sever error",
+      err: error.stack,
+    };
+  }
+};
+
 export const updateAttendance = async (ctx, next) => {
   const { attendanceExitTime } = ctx.request.body;
   const userId = ctx.params.id;
