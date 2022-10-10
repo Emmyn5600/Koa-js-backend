@@ -8,7 +8,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - DATABASE_URL=process.ENV.DATABASE_URL
+      - DATABASE_URL=process.env.DATABASE_URL
     depends_on:
       - koa_db
   koa_db:

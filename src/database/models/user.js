@@ -22,10 +22,22 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
-      password: DataTypes.STRING,
-      position: DataTypes.STRING,
-      age: DataTypes.INTEGER,
-      role: DataTypes.STRING,
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      position: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      age: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       sequelize,

@@ -10,6 +10,7 @@ import {
   deleteUser,
 } from "./controller/users";
 
+import { createAttendance, updateAttendance } from "./controller/attendance";
 import { signup, signin } from "./controller/authUsers";
 
 import { protect, restrictRoleTo } from "./middleware/authAdmin";
@@ -38,10 +39,12 @@ app.use(async (ctx, next) => {
 app.use(router.routes()).use(router.allowedMethods());
 router
   .get("/users", getAllUsers)
-  .get("/users/:id", protect, restrictRoleTo("admin"), getUser)
+  .get("/users/:id", getUser)
   .put("/users/:id", protect, restrictRoleTo("admin"), updateUser)
   .delete("/users/:id", protect, restrictRoleTo("admin"), deleteUser)
   .post("/signup", signup)
-  .post("/signin", signin);
+  .post("/signin", signin)
+  .post("/createAttendance/:id", createAttendance)
+  .put("/updateAttendance/:id", updateAttendance);
 
 export default app;

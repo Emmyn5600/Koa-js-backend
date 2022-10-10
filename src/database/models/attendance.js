@@ -14,9 +14,18 @@ module.exports = (sequelize, DataTypes) => {
   Attendance.init(
     {
       userId: DataTypes.INTEGER,
-      attendanceDate: DataTypes.DATE,
-      attendanceEntranceTime: DataTypes.TIME,
-      attendanceExitTime: DataTypes.TIME,
+      attendanceDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      attendanceEntranceTime: {
+        type: DataTypes.TIME,
+        allowNull: false,
+      },
+      attendanceExitTime: {
+        type: DataTypes.TIME,
+        allowNull: true,
+      },
     },
     {
       sequelize,
