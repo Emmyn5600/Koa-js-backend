@@ -34,7 +34,7 @@ export const createAttendance = async (ctx, next) => {
     ctx.status = 500;
     ctx.body = {
       status: "Fail",
-      message: "Error while creating a user",
+      message: "Error while updating a Attendance",
       err: error.message,
     };
   }
@@ -42,32 +42,26 @@ export const createAttendance = async (ctx, next) => {
 
 export const updateAttendance = async (ctx, next) => {
   const { attendanceExitTime } = ctx.request.body;
-  try {
-    const userId = ctx.params.id;
-    const user = await User.findOne({ where: { id: userId } });
+  const userId = ctx.params.id;
+  const user = await User.findOne({ where: { id: userId } });
 
-    if (!user) {
-      ctx.status = 404;
-      ctx.body = {
-        message: "User with this id not found",
-      };
-    }
-
-    const attendanceupdate = await Attendance.update(
+  if (!user) {
+    ctx.status = 404;
+    ctx.body = {
+      message: "User with this id not found",
+    };
+  } else {
+    await Attendance.update(
       {
         attendanceExitTime,
       },
-      { where: { userId } }
+      {
+        where: { userId },
+      }
     );
     ctx.status = 200;
     ctx.body = {
-      message: "user updated successfully",
-    };
-  } catch (error) {
-    ctx.status = 500;
-    ctx.body = {
-      message: "Internal sever error",
-      err: error.message,
+      message: "Attendance updated successfully",
     };
   }
 };

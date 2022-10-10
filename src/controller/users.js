@@ -50,19 +50,11 @@ export const getUser = async (ctx, next) => {
 };
 
 export const updateUser = async (ctx, next) => {
-  const USER_MODEL = {
-    username: ctx.request.body.username,
-    email: ctx.request.body.email,
-    password: ctx.request.body.password,
-    position: ctx.request.body.position,
-    age: ctx.request.body.age,
-    role: ctx.request.body.role,
-  };
+  const { username, email, password, position, age, role } = ctx.request.body;
+  const userId = ctx.params.id;
   try {
-    const userId = ctx.params.id;
-    const userupdate = await User.update(USER_MODEL, {
+    const userupdate = await User.findOne({
       where: { id: userId },
-      include: ["Attends"],
     });
     if (!userupdate) {
       ctx.status = 404;
@@ -70,6 +62,19 @@ export const updateUser = async (ctx, next) => {
         message: "User with this id not found",
       };
     } else {
+      await User.update(
+        {
+          username,
+          email,
+          password,
+          position,
+          age,
+          role,
+        },
+        {
+          where: { id: userId },
+        }
+      );
       ctx.status = 200;
       ctx.body = {
         message: "user updated successfully",

@@ -40,7 +40,7 @@ app.use(router.routes()).use(router.allowedMethods());
 router
   .get("/users", getAllUsers)
   .get("/users/:id", getUser)
-  .put("/users/:id", protect, restrictRoleTo("admin"), updateUser)
+  .put("/users/:id", updateUser)
   .delete("/users/:id", protect, restrictRoleTo("admin"), deleteUser)
   .post("/signup", signup)
   .post("/signin", signin)
