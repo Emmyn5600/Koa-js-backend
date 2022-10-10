@@ -13,7 +13,7 @@ import {
 import { createAttendance, updateAttendance } from "./controller/attendance";
 import { signup, signin } from "./controller/authUsers";
 
-import { protect, restrictRoleTo } from "./middleware/authAdmin";
+import { protect, admin } from "./middleware/authAdmin";
 
 const app = new koa();
 const router = new koaRouter();
@@ -38,13 +38,13 @@ app.use(async (ctx, next) => {
 //setting the router middleware
 app.use(router.routes()).use(router.allowedMethods());
 router
-  .get("/users", getAllUsers)
-  .get("/users/:id", getUser)
-  .put("/users/:id", updateUser)
-  .delete("/users/:id", protect, restrictRoleTo("admin"), deleteUser)
+  .get("/users", protect, admin, getAllUsers)
+  .get("/users/:id", protect, admin, getUser)
+  .put("/users/:id", protect, admin, updateUser)
+  .delete("/users/:id", protect, admin, deleteUser)
   .post("/signup", signup)
   .post("/signin", signin)
-  .post("/createAttendance/:id", createAttendance)
-  .put("/updateAttendance/:id", updateAttendance);
+  .post("/createAttendance/:id", protect, admin, createAttendance)
+  .put("/updateAttendance/:id", protect, admin, updateAttendance);
 
 export default app;

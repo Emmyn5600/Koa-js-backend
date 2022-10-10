@@ -73,21 +73,20 @@ export const protect = async (ctx, next) => {
 
   ctx.user = freshUser;
 
-  next();
+  return next();
 };
 
 /**
  * This middleware ensures that the user has ability to access a certain resource
  */
 
-export const restrictRoleTo = (...roles) => {
-  return async (ctx, next) => {
-    if (!roles.includes(ctx.user.role)) {
-      ctx.status = 403;
-      ctx.body = {
-        message: "You are not permitted to perform this action",
-      };
-    }
-    await next();
-  };
+export const admin = (ctx, next) => {
+  if (ctx.user && ctx.user.role === "admin") {
+    return next();
+  } else {
+    ctx.status = 403;
+    ctx.body = {
+      message: "You are not permitted to perform this action",
+    };
+  }
 };
