@@ -12,8 +12,9 @@ import {
 
 import {
   createAttendance,
-  updateAttendance,
+  updateUserAttendance,
   getAllAttendances,
+  updateAttendanceForUsers,
 } from "./controller/attendance";
 import { signup, signin } from "./controller/authUsers";
 
@@ -49,7 +50,13 @@ router
   .post("/signup", signup)
   .post("/signin", signin)
   .post("/createAttendance/:id", protect, admin, createAttendance)
-  .put("/updateAttendance/:id", protect, admin, updateAttendance)
-  .get("/getAllAttendances", getAllAttendances);
+  .get("/getAllAttendances", getAllAttendances)
+  .patch("/updateAttendance/:id", protect, admin, updateUserAttendance)
+  .put(
+    "/updateAttendanceForUsers/:id",
+    protect,
+    admin,
+    updateAttendanceForUsers
+  );
 
 export default app;

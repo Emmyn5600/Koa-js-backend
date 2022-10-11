@@ -57,7 +57,7 @@ export const getAllAttendances = async (ctx, next) => {
   }
 };
 
-export const updateAttendance = async (ctx, next) => {
+export const updateUserAttendance = async (ctx, next) => {
   const { attendanceExitTime } = ctx.request.body;
   const userId = ctx.params.id;
   const user = await User.findOne({ where: { id: userId } });
@@ -70,6 +70,35 @@ export const updateAttendance = async (ctx, next) => {
   } else {
     await Attendance.update(
       {
+        attendanceExitTime,
+      },
+      {
+        where: { userId },
+      }
+    );
+    ctx.status = 200;
+    ctx.body = {
+      message: "Attendance updated successfully",
+    };
+  }
+};
+
+export const updateAttendanceForUsers = async (ctx, next) => {
+  const { attendanceDate, attendanceEntranceTime, attendanceExitTime } =
+    ctx.request.body;
+  const userId = ctx.params.id;
+  const user = await User.findOne({ where: { id: userId } });
+
+  if (!user) {
+    ctx.status = 404;
+    ctx.body = {
+      message: "User with this id not found",
+    };
+  } else {
+    await Attendance.update(
+      {
+        attendanceDate,
+        attendanceEntranceTime,
         attendanceExitTime,
       },
       {
