@@ -42,7 +42,7 @@ app.use(async (ctx, next) => {
 //setting the router middleware
 app.use(router.routes()).use(router.allowedMethods());
 router
-  .get("/users", protect, admin, getAllUsers)
+  .get("/users", getAllUsers)
   .get("/users/:id", protect, admin, getUser)
   .put("/users/:id", protect, admin, updateUser)
   .delete("/users/:id", protect, admin, deleteUser)
@@ -50,6 +50,6 @@ router
   .post("/signin", signin)
   .post("/createAttendance/:id", protect, admin, createAttendance)
   .put("/updateAttendance/:id", protect, admin, updateAttendance)
-  .get("/getAllAttendances", protect, admin, getAllAttendances);
+  .get("/getAllAttendances", getAllAttendances);
 
 export default app;

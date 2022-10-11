@@ -42,7 +42,7 @@ export const createAttendance = async (ctx, next) => {
 
 export const getAllAttendances = async (ctx, next) => {
   try {
-    const allAttendances = await Attendance.findAll();
+    const allAttendances = await Attendance.findAll({ include: "user" });
     ctx.status = 200;
     ctx.body = {
       allAttendances,
