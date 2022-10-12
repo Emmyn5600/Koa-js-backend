@@ -10,6 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ User }) {
       this.belongsTo(User, { foreignKey: "userId", as: "user" });
     }
+
+    toJSON() {
+      return {
+        ...this.get(),
+        role: undefined,
+        password: undefined,
+      };
+    }
   }
   Attendance.init(
     {
