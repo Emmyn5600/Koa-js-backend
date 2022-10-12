@@ -137,3 +137,30 @@ export const updateAttendanceForUsers = async (ctx, next) => {
     };
   }
 };
+
+export const deleteAttendance = async (ctx, next) => {
+  const userId = ctx.params.id;
+  try {
+    const userattendance = await Attendance.destroy({
+      where: { id: userId },
+      include: ["user"],
+    });
+    if (!userattendance) {
+      ctx.status = 404;
+      ctx.body = {
+        message: "User with this id not found",
+      };
+    } else {
+      ctx.status = 200;
+      ctx.body = {
+        message: "OK, Attendance has been deleted successfully",
+      };
+    }
+  } catch (error) {
+    ctx.status = 500;
+    console.error(error);
+    ctx.body = {
+      message: "Internal sever error",
+    };
+  }
+};

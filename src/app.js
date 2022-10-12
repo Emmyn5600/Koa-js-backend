@@ -15,6 +15,7 @@ import {
   updateUserAttendance,
   getAllAttendances,
   getAttendance,
+  deleteAttendance,
   updateAttendanceForUsers,
 } from "./controller/attendance";
 import { signup, signin } from "./controller/authUsers";
@@ -50,15 +51,11 @@ router
   .delete("/users/:id", protect, admin, deleteUser)
   .post("/signup", signup)
   .post("/signin", signin)
-  .post("/createAttendance/:id", createAttendance)
-  .get("/getAllAttendances", getAllAttendances)
-  .get("/getAttendance/:id", getAttendance)
-  .patch("/updateAttendance/:id", protect, admin, updateUserAttendance)
-  .put(
-    "/updateAttendanceForUsers/:id",
-    protect,
-    admin,
-    updateAttendanceForUsers
-  );
+  .post("/attendance/:id", createAttendance)
+  .get("/attendances", getAllAttendances)
+  .get("/attendance/:id", getAttendance)
+  .patch("/attendance/:id", protect, admin, updateUserAttendance)
+  .delete("/attendance/:id", deleteAttendance)
+  .put("/attendanceForUsers/:id", protect, admin, updateAttendanceForUsers);
 
 export default app;
