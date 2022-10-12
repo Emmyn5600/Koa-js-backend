@@ -13,4 +13,4 @@ RUN npm install --no-optional && npm cache clean --force
 WORKDIR /opt
 COPY . .
 
-CMD [ "node", "index.js" ]
+CMD [ "node", "./src/server.js" ]
