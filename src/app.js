@@ -50,7 +50,7 @@ router
   .delete("/users/:id", protect, admin, deleteUser)
   .post("/signup", signup)
   .post("/signin", signin)
-  .post("/createAttendance/:id", protect, admin, createAttendance)
+  .post("/createAttendance/:id", createAttendance)
   .get("/getAllAttendances", getAllAttendances)
   .get("/getAttendance/:id", getAttendance)
   .patch("/updateAttendance/:id", protect, admin, updateUserAttendance)
