@@ -10,13 +10,12 @@ export const createAttendance = async (ctx, next) => {
   try {
     const userId = ctx.params.id;
     const user = await User.findOne({ where: { id: userId } });
-    console.log(user);
     const { attendanceDate, attendanceEntranceTime } = ctx.request.body;
     if (!user) {
       ctx.status = 400;
       ctx.body = {
         status: "fail",
-        message: "User with this is not found",
+        message: "User with this id is not found",
       };
     } else {
       const newAttendance = await Attendance.create({
