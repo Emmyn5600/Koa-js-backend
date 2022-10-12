@@ -56,6 +56,6 @@ router
   .get("/attendance/:id", getAttendance)
   .patch("/attendance/:id", protect, admin, updateUserAttendance)
   .delete("/attendance/:id", deleteAttendance)
-  .put("/attendanceForUsers/:id", protect, admin, updateAttendanceForUsers);
+  .put("/attendanceusers/:id", updateAttendanceForUsers);
 
 export default app;

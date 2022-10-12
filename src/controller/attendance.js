@@ -110,7 +110,7 @@ export const updateUserAttendance = async (ctx, next) => {
 };
 
 export const updateAttendanceForUsers = async (ctx, next) => {
-  const { attendanceDate, attendanceEntranceTime, attendanceExitTime } =
+  const { attendancedate, attendanceentrancetime, attendanceexittime } =
     ctx.request.body;
   const userId = ctx.params.id;
   const user = await User.findOne({ where: { id: userId } });
@@ -123,9 +123,9 @@ export const updateAttendanceForUsers = async (ctx, next) => {
   } else {
     await Attendance.update(
       {
-        attendanceDate,
-        attendanceEntranceTime,
-        attendanceExitTime,
+        attendanceDate: attendancedate,
+        attendanceEntranceTime: attendanceentrancetime,
+        attendanceExitTime: attendanceexittime,
       },
       {
         where: { userId },
@@ -133,7 +133,7 @@ export const updateAttendanceForUsers = async (ctx, next) => {
     );
     ctx.status = 200;
     ctx.body = {
-      message: "Attendance updated successfully",
+      message: "Attendance users updated successfully",
     };
   }
 };
